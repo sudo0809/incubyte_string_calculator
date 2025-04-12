@@ -10,8 +10,13 @@ class StringCalculator
             delimiter = /#{custom_delimiter}|\n/
         end
 
-        numbers = input_string.split(delimiter)
+        numbers = input_string.split(delimiter).map(&:to_i)
 
-        numbers.map(&:to_i).sum
+        negatives = numbers.select { |n| n < 0 }
+        if negatives.present?
+            raise "negative numbers not allowed #{negatives.join(',')}"
+        end
+
+        numbers.sum
     end
 end
