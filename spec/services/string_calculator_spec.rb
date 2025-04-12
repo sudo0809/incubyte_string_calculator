@@ -23,6 +23,10 @@ RSpec.describe StringCalculator do
       it 'handles multiple newlines between numbers' do
         expect(StringCalculator.add("//;\n1;2\n3")).to eq(6)
       end
+
+      it 'handles custom multiple-character delimiters' do
+        expect(StringCalculator.add("//[***]\n1***2***3")).to eq(6)
+      end
     end
 
     it 'raises an exception for a single negative number' do
