@@ -2,15 +2,15 @@ class StringCalculator
     def self.add(input_string)
         return 0 if input_string.empty?
 
+        delimiter = /,|\n/
 
         if input_string.starts_with?("//")
-            numbers_array = input_string.split("\n")[1]
-            delimiter = input_string.split("\n")[0][2..]
-            numbers = numbers_array.split("#{delimiter}")
-        else
-            numbers = input_string.gsub("\n", ',').split(',')
+            custom_delimiter, input_string = input_string.split("\n", 2)
+            custom_delimiter = custom_delimiter[2..]
+            delimiter = /#{custom_delimiter}|\n/
         end
 
+        numbers = input_string.split(delimiter)
 
         numbers.map(&:to_i).sum
     end
